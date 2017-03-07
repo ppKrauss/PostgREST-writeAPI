@@ -9,7 +9,51 @@ After check pre-requisites (NodeJS v4.2), `git clone` this repo, you can generat
 cd PostgREST-writeAPI
 node writeApi.js --tpl=01 --api=petstore-expanded | more
 ```
-Edit `api-spec/petstore-expanded.json` and `nginx-tpl/tpl01-baseBreak.mustache` to try variations.
+Edit `api-spec/petstore-expanded.json` and `nginx-tpl/tpl01-baseBreak.mustache` to try variations.  What it do:
+
+Original endpoint | Expected by [API-specification](api-spec/petstore-expanded.json)
+------------ | -------------
+`http://localhost:3000/pets` | `petstore.swagger.io/api/pets` or `petstore.swagger.io/api/darlings`
+`http://localhost:3000/pets?id=eq.$1` | `petstore.swagger.io/api/pets/{id}`
+
+So *PostgREST-writeAPI* generates a [Nginx rewrite module script](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) that implements the expected API-specification, as below:
+
+```
+server {
+        server_name petstore.swagger.io;
+        root /var/www/petstore.swagger.io/html;
+
+        # publishing by default the HTML for API description and related files for navigation
+        index index.html index.htm;
+
+	location / {
+		try_files $uri $uri/ @proxy;
+	}
+
+	location @proxy {
+       #### endpoints defined by OpenAPI spec of this app:
+       
+                 rewrite    # endpoint "pets" for get,post
+                  ^/api/(pets?|darlings?)$
+                  http://localhost:3000/pets
+                  break;
+
+                rewrite    # endpoint "pets/{id}" for get,delete
+                  ^/api/pets/([0-9]+)
+                  http://localhost:3000/pets?id=eq.$1
+                  break;
+
+		#### default and auxiliar endpoint, for all other requests for PostgREST-queries
+		rewrite  
+		  ^/api/(.*)$ 
+		  /$1 
+		  break;
+
+		proxy_pass  http://127.0.0.1:3000;  # my PostREST is  here!
+		...
+	}
+}
+```
 
 ## Motivations
 
@@ -17,11 +61,11 @@ PostgREST *endpoints* are ready-for-use, but, sometimes you can't reuse directal
  
 This project was developed to simplify this PostgREST use case: to obey the OpenAPI specification of your project.
 
-### Market motivations
+### Need for fast prototipation
 
-PostgreSQL is not an "[agile](https://en.wikipedia.org/wiki/Agile_software_development) tool"?  Now it is! 
+PostgreSQL is not an "[agile](https://en.wikipedia.org/wiki/Agile_software_development) tool"?  We can go from scratch to a set of endpoints serving a database, in minutes? We can use only the database, alone, to implement *web-application [prototypes](https://en.wikipedia.org/wiki/Software_prototyping)*?  
 
-You can generate a ready-for-use production version system with PostgREST.  Is not perfect yet, but in some niche *PostgreSQL experts* now can compete with Spring-boot, Django, CakePHP, etc. *agile frameworks*, in the back-end design and [prototipation](https://en.wikipedia.org/wiki/Software_prototyping). The goal of this project is to  extend the PostgREST capabilty in agile implementation of any (arbitrary) endpoint specifications. 
+With PostgREST we can (!!) and the goal of this project is to expand the spectrum of applications. We can extend the PostgREST capabilties to "plug-and-play" endpoints, by its OpenAPI specifications.
 
 ## OpenAPI addictions to specify your system
 
