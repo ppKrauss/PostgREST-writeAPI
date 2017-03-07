@@ -14,7 +14,7 @@ Edit `api-spec/petstore-expanded.json` and `nginx-tpl/tpl01-baseBreak.mustache` 
 Original endpoint | Expected by [API-specification](api-spec/petstore-expanded.json)
 ------------ | -------------
 `http://localhost:3000/pets` | `petstore.swagger.io/api/pets` or `petstore.swagger.io/api/darlings`
-`http://localhost:3000/pets?id=eq.$1` | `petstore.swagger.io/api/pets/{id}`
+`http://localhost:3000/pets?id=eq.`_id_ | `petstore.swagger.io/api/pets/{id}`
 
 So *PostgREST-writeAPI* generates a [Nginx rewrite module script](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) that implements the expected API-specification, as below:
 
@@ -57,7 +57,7 @@ server {
 
 ## Motivations
 
-PostgREST *endpoints* are ready-for-use, but, sometimes you can't reuse directally its "complex URL" endpoints, or need compliance with system requirements &mdash; already expressed in an OpenAPI specification.
+PostgREST *endpoints* are ready-for-use, but, sometimes you can't reuse directally its "complex URL" endpoints, or need compliance with system requirements &mdash; already expressed in an formal specification.
  
 This project was developed to simplify this PostgREST use case: to obey the OpenAPI specification of your project.
 
