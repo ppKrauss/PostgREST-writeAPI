@@ -55,6 +55,8 @@ server {
 }
 ```
 
+Variations can be obtained changing the template. Example: to stop to use the *PostgREST queryes* (eg. `petstore.swagger.io/api/otherTable`) you can use `--tpl=02`  in the command line, that will generate script by [tpl02-baseBreak-noQuery](nginx-tpl/tpl02-baseBreak-noQuery.mustache) template, eliminating the last ` rewrite` clause.
+
 ## Motivations
 
 PostgREST *endpoints* are ready-for-use, but, sometimes you can't reuse directally its "complex URL" endpoints, or need compliance with system requirements &mdash; already expressed in an formal specification.
