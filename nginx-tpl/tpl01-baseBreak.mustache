@@ -19,13 +19,18 @@ server {
 		# # # # # # # # # #
 		#### special endpoints
 
-		{{#each rewrites}}
-                rewrite    # endpoint "{{notes}}" for {{lst}}
-                  {{{rewrite_regex}}}
-                  {{{rewrite_url}}}
+	{{#each rewrites}}
+                {{#rewrite_regex}}
+                rewrite    # endpoint "{{../notes}}" for {{../lst}}
+                  {{{../rewrite_regex}}}
+                  {{{../rewrite_url}}}
                   break;
+                {{/rewrite_regex}}
+                {{^rewrite_regex}}
+                # endpoint {{notes}} for {{lst}}
+                {{/rewrite_regex}}
 
-		{{/each}}
+	{{/each}}
 
 		# # # # # # # # # #
 		#### default and auxiliar endpoint, for all requests of PostgREST-queries

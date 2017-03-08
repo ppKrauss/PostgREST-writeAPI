@@ -155,6 +155,36 @@
           }
         }
       }
+    },
+    "/insects": {
+      "get": {
+        "description": "Returns a list of insect names, from de insects table",
+        "operationId": "list or find insects",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID of pet to fetch",
+            "required": false,
+            "type": "string",
+            "format": "eq\\.[0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pet response",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

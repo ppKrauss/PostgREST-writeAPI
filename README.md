@@ -31,23 +31,25 @@ server {
 	}
 
 	location @proxy {
-       #### endpoints defined by OpenAPI spec of this app:
-       
-                 rewrite    # endpoint "pets" for get,post
-                  ^/api/(pets?|darlings?)$
-                  http://localhost:3000/pets
-                  break;
+		#### endpoints defined by OpenAPI spec of this app:
 
-                rewrite    # endpoint "pets/{id}" for get,delete
-                  ^/api/pets/([0-9]+)
-                  http://localhost:3000/pets?id=eq.$1
-                  break;
+		rewrite    # endpoint "pets" for get,post
+		^/api/(pets?|darlings?)$
+		http://localhost:3000/pets
+		break;
+
+		rewrite    # endpoint "pets/{id}" for get,delete
+		^/api/pets/([0-9]+)
+		http://localhost:3000/pets?id=eq.$1
+		break;
+
+		# endpoint insects (automatic PostgREST) for get
 
 		#### default and auxiliar endpoint, for all other requests for PostgREST-queries
 		rewrite  
-		  ^/api/(.*)$ 
-		  /$1 
-		  break;
+		^/api/(.*)$ 
+		/$1 
+		break;
 
 		proxy_pass  http://127.0.0.1:3000;  # my PostREST is  here!
 		...

@@ -78,7 +78,7 @@ for(var e of Object.keys(apiSpec.paths)) {
        }
        spec.rewrites.push({ notes:e, rewrite_regex:"^"+basePath+"/"+defRgx, rewrite_url:defUrl, lst:lst });
    } else
-       spec.rewrites.push({notes:"using table "+e});
+       spec.rewrites.push({notes:e+" (automatic PostgREST)", lst:lst});
 }
 
 var templateSrc = fs.readFileSync(path + "/nginx-tpl/"+tpl_file[arg['tpl']]).toString();
