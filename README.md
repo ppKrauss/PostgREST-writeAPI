@@ -20,11 +20,12 @@ So *PostgREST-writeAPI* generates a [Nginx rewrite module script](http://nginx.o
 
 ```sh
 server {
-        server_name petstore.swagger.io;
-        root /var/www/petstore.swagger.io/html;
 
-        # publishing by default the HTML for API description and related files for navigation
-        index index.html index.htm;
+	server_name petstore.swagger.io;
+	root /var/www/petstore.swagger.io/html;
+
+	# publishing by default the HTML for API description and related files for navigation
+	index index.html index.htm;
 
 	location / {
 		try_files $uri $uri/ @proxy;
