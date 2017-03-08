@@ -18,7 +18,7 @@ Original endpoint | Expected by [API-specification](api-spec/petstore-expanded.j
 
 So *PostgREST-writeAPI* generates a [Nginx rewrite module script](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) that implements the expected API-specification, as below:
 
-```
+```sh
 server {
         server_name petstore.swagger.io;
         root /var/www/petstore.swagger.io/html;
