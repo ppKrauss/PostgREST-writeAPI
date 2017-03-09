@@ -77,7 +77,10 @@ Your application can use full stack PostgREST (the URL-SQLquery syntax) for defa
 and two new fields must be included in your OpenAPI spec (your `swagger.json`), to describe the endpoints with non-default PostgREST behaviour:
 
 * `x-rewrite_regex`: the regular expression that in fact represents the endpoint is a concatenation of *basePath*, *localPath* and *rewrite_regex*.
+
 * `x-rewrite_url`: the target-URL with optional regex-variables (eg. $1).
+
+* `x-proxy_url`: the URL of the "root" that is handling the `x-rewrite_url`, when is not PostgREST (the default proxy). 
 
 When one or both are declared at JSON's API description, it is translated to Nginx *rewrite* directive. Else default PostgREST is adopted.
 The `x-` prefix is the ["vendor extension" of OpenAPI](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#vendorExtensions).
@@ -86,10 +89,12 @@ The `x-` prefix is the ["vendor extension" of OpenAPI](https://github.com/OAI/Op
 
 As the project is alpha version, have good methodology but not an automatic procedure. Simple steps:
 
-1. Check what templete you need (or colabore creating a new one!). See [nginx-tpl](nginx-tpl) folder with some examples.
+1. Prepare an OpenAPI specification of your system or application. Use basic PostgREST where is possible, where is not, two alternatives: rewrite to proxy-PostgREST or implement in it in other "proxy"... So, express also in the API specification the fields `x-proxy_url`, `x-rewrite_regex` and `x-rewrite_url`.
 
-2. Save your API specification (`swagger.json`)  at [api-spec](api-spec) with your project's name (eg. `myproj.json`), and edit it ading the fields xx and yy.
+2. Check what templete you need (or colabore creating a new one!). See [nginx-tpl](nginx-tpl) folder with some examples (or use template `01` as first try).
 
-3. run `node writeApi.js > subdomain.conf` with correct parameters. It will generate the Nginx's script for your server's ` /etc/nginx/sites-available`.
+3. Save your API specification (`swagger.json`)  at [api-spec](api-spec) with your project's name (eg. `myproj.json`), and edit it ading the fields xx and yy.
+
+4. run `node writeApi.js > subdomain.conf` with correct parameters. It will generate the Nginx's script for your server's ` /etc/nginx/sites-available`.
  
-4. do next steps as usual Nginx implementation
+5. do next steps as usual Nginx implementation
