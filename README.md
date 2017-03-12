@@ -55,7 +55,7 @@ server {
 		rewrite     ^/api/(.*)$      /$1     break;
 		
 		### proxy configurations:
-		proxy_pass  http://127.0.0.1:3000;  # my PostREST is  here!
+		proxy_pass  http://localhost:3000;  # my PostREST is  here!
 		...
 	}
 }
