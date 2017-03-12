@@ -185,6 +185,37 @@
           }
         }
       }
+    },
+    "/fishes": {
+      "x-proxy_url":"http://localhost:4000",
+      "get": {
+        "description": "Returns a list of fish names, from de fish sql-view",
+        "operationId": "list or find fishes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID of fish to fetch",
+            "required": false,
+            "type": "string",
+            "format": "eq\\.[0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pet response",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
