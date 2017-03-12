@@ -1,6 +1,6 @@
 We use the best, [Nginx](https://nginx.org/) and [PostgREST](https://postgrest.com), to translate your [OpenAPI specification](https://www.openapis.org/specification) into a [back-end](https://en.wikipedia.org/wiki/Front_and_back_ends) system.
 
-The project offers automatic generation of the main piece for implementation of  your *endpoints*, the *Nginx configuration script* &mdash; that acts as a primary [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)-controller for PostgREST and for your system. 
+The project offers automatic generation of the main piece for implementation of  your *endpoints*, the *Nginx configuration script* &mdash; that acts as a primary dispatcher or controller, for PostgREST and for your system. 
 
 NOTE: usually this piece of software (the Nginx script) is named [*reverse proxy*](https://en.wikipedia.org/wiki/Reverse_proxy) or "API gateway",
 
@@ -13,14 +13,14 @@ After check pre-requisites (NodeJS v4.2), `git clone` this repo, you can generat
 cd PostgREST-writeAPI
 node writeApi.js --tpl=01 --api=petstore-expanded | more
 ```
-Edit `api-spec/petstore-expanded.json` and `nginx-tpl/tpl01-baseBreak.mustache` to try variations.  What it do:
+Edit `api-spec/petstore-expanded.json` and `nginx-tpl/tpl01-baseBreak.mustache` to try variations.  What it do: transforms original *localhost endpoints* into specified endpoints. 
 
 Original endpoint | Expected by [API-specification](api-spec/petstore-expanded.json)
 ------------ | -------------
 `http://localhost:3000/pets` | `petstore.swagger.io/api/pets` or `petstore.swagger.io/api/darlings`
 `http://localhost:3000/pets?id=eq.`_id_ | `petstore.swagger.io/api/pets/{id}`
 
-So *PostgREST-writeAPI* generates a [Nginx rewrite module script](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) that implements the expected API-specification, as below:
+So *PostgREST-writeAPI* generates the code below, a [Nginx rewrite module script](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) that implements the expected API&#8209;gateway&nbsp;specification:
 
 ```sh
 server {
