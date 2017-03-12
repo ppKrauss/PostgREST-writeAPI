@@ -4,7 +4,7 @@ The project offers automatic generation of the main piece for implementation of 
 
 ![](https://github.com/ppKrauss/my-sandbox/raw/master/OpenAPI-Gateway-codegen/assets/Reverse_proxy2.svg.png)
 
-## Illsutrating usage
+## Illustrating usage
 
 After check pre-requisites (NodeJS v4.2), `git clone` this repo, you can generate an Nginx config-file with
 ```sh
