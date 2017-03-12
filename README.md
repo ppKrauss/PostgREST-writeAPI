@@ -46,6 +46,13 @@ server {
 
 		# endpoint insects (automatic PostgREST) for get
 
+                # endpoint insects (automatic PostgREST) for get
+
+                rewrite    # endpoint "fishes TO OTHER PROXY" for get
+                  ^/api/fishes
+                  http://localhost:4000
+                  break;
+
 		### default and auxiliar endpoint, for all other requests for PostgREST-queries
 		rewrite     ^/api/(.*)$      /$1     break;
 		
