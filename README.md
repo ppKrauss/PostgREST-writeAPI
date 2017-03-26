@@ -2,7 +2,7 @@ We use the best, [Nginx](https://nginx.org/) and [PostgREST](https://postgrest.c
 
 The project offers automatic generation of the main piece for implementation of  your *endpoints*, the *Nginx configuration script* &mdash; that acts as a primary dispatcher or controller, for PostgREST and for your system. In the context of a "microservices ecosystem", this controller do the *microservices orchestration*.
 
-NOTE: usually this piece of software (the Nginx script) is named [*reverse proxy*](https://en.wikipedia.org/wiki/Reverse_proxy) or "**API gateway**",
+NOTE: usually this piece of software is named [*reverse proxy*](https://en.wikipedia.org/wiki/Reverse_proxy) or "**API gateway**",
 
 ![](https://github.com/ppKrauss/my-sandbox/raw/master/OpenAPI-Gateway-codegen/assets/Reverse_proxy2.svg.png)
 
@@ -110,5 +110,5 @@ As the project is alpha version, have good methodology but not an automatic proc
 
 ## OpenAPI stadanrds and parallel initiatives
 
-Please help to start, at *Swagger-API* community, via [this *swagger-codegen* approved proposal](https://github.com/swagger-api/swagger-codegen/issues/5034), a new code generator, like here, but plugged into a ecosystem of standard code generators.
+Please help to start, at *Swagger-API* community, via [this *swagger-codegen* approved proposal](https://github.com/swagger-api/swagger-codegen/issues/5034), a new code generator, like here, but plugged into an ecosystem of standard code generators.
 
