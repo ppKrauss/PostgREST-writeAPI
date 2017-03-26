@@ -2,9 +2,9 @@ We use the best, [Nginx](https://nginx.org/) and [PostgREST](https://postgrest.c
 
 The project offers automatic generation of the main piece for implementation of  your *endpoints*, the *Nginx configuration script* &mdash; that acts as a primary dispatcher or controller, for PostgREST and for your system. In the context of a "microservices ecosystem", this controller do the *microservices orchestration*.
 
-NOTE: usually this piece of software is named [*reverse proxy*](https://en.wikipedia.org/wiki/Reverse_proxy) or "**API gateway**",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![](https://github.com/ppKrauss/my-sandbox/raw/master/OpenAPI-Gateway-codegen/assets/Reverse_proxy2.svg.png)
 
-![](https://github.com/ppKrauss/my-sandbox/raw/master/OpenAPI-Gateway-codegen/assets/Reverse_proxy2.svg.png)
+Terminological note: usually this piece of software is named [*reverse proxy*](https://en.wikipedia.org/wiki/Reverse_proxy) or "**API gateway**".
 
 ## Illustrating usage
 
