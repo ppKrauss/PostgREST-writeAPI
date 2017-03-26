@@ -1,8 +1,8 @@
-We use the best, [Nginx](https://nginx.org/) and [PostgREST](https://postgrest.com), to translate your [OpenAPI specification](https://www.openapis.org/specification) into a [back-end](https://en.wikipedia.org/wiki/Front_and_back_ends) system.
+We use the best, [Nginx](https://nginx.org/) and [PostgREST](https://postgrest.com), to translate your [OpenAPI specification](https://www.openapis.org/specification) into a **plug-and-play [back-end](https://en.wikipedia.org/wiki/Front_and_back_ends)** system.
 
 The project offers automatic generation of the main piece for implementation of  your *endpoints*, the *Nginx configuration script* &mdash; that acts as a primary dispatcher or controller, for PostgREST and for your system. In the context of a "microservices ecosystem", this controller do the *microservices orchestration*.
 
-NOTE: usually this piece of software (the Nginx script) is named [*reverse proxy*](https://en.wikipedia.org/wiki/Reverse_proxy) or "API gateway",
+NOTE: usually this piece of software (the Nginx script) is named [*reverse proxy*](https://en.wikipedia.org/wiki/Reverse_proxy) or "**API gateway**",
 
 ![](https://github.com/ppKrauss/my-sandbox/raw/master/OpenAPI-Gateway-codegen/assets/Reverse_proxy2.svg.png)
 
@@ -107,3 +107,8 @@ As the project is alpha version, have good methodology but not an automatic proc
 4. run `node writeApi.js > subdomain.conf` with correct parameters. It will generate the Nginx's script for your server's ` /etc/nginx/sites-available`.
  
 5. do next steps as usual Nginx implementation
+
+## OpenAPI stadanrds and parallel initiatives
+
+Please help to start, at *Swagger-API* community, via [this *swagger-codegen* approved proposal](https://github.com/swagger-api/swagger-codegen/issues/5034), a new code generator, like here, but plugged into a ecosystem of standard code generators.
+
